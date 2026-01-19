@@ -1,5 +1,4 @@
 {
-    "$schema": "https://json.schemastore.org/package.json",
     "name": "vue-dirty-guard",
     "version": "0.1.0",
     "description": "Enterprise-level Dirty Guard SDK for Vue 3",
@@ -7,6 +6,13 @@
     "main": "dist/index.cjs",
     "module": "dist/index.mjs",
     "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs"
+        }
+    },
     "files": [
         "dist"
     ],

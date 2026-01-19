@@ -6,7 +6,9 @@ settings:
 
 importers:
 
-  .:
+  .: {}
+
+  packages/vue-dirty-guard:
     devDependencies:
       '@types/jest':
         specifier: ^30.0.0
@@ -45,6 +47,28 @@ importers:
       element-plus:
         specifier: '>=2.7'
         version: 2.13.1(vue@3.5.26(typescript@5.9.3))
+
+  playground:
+    dependencies:
+      element-plus:
+        specifier: ^2.6.0
+        version: 2.13.1(vue@3.5.26(typescript@5.9.3))
+      vue:
+        specifier: ^3.4.0
+        version: 3.5.26(typescript@5.9.3)
+      vue-dirty-guard:
+        specifier: workspace:*
+        version: link:../packages/vue-dirty-guard
+      vue-router:
+        specifier: ^4.3.0
+        version: 4.6.4(vue@3.5.26(typescript@5.9.3))
+    devDependencies:
+      '@vitejs/plugin-vue':
+        specifier: ^5.0.0
+        version: 5.2.4(vite@5.4.21(@types/node@25.0.9))(vue@3.5.26(typescript@5.9.3))
+      vite:
+        specifier: ^5.0.0
+        version: 5.4.21(@types/node@25.0.9)
 
 packages:
 
@@ -671,6 +695,13 @@ packages:
 
   '@types/yargs@17.0.35':
     resolution: {integrity: sha512-qUHkeCyQFxMXg79wQfTtfndEC+N9ZZg76HJftDJp+qH2tV7Gj4OJi7l+PiWwJ+pWtW8GwSmqsDj/oymhrTWXjg==}
+
+  '@vitejs/plugin-vue@5.2.4':
+    resolution: {integrity: sha512-7Yx/SXSOcQq5HiiV3orevHUFn+pmMB4cgbEkDYgnkUWb0WfeQ/wa2yFv6D5ICiCQOVpjA7vYDXrC7AGO8yjDHA==}
+    engines: {node: ^18.0.0 || >=20.0.0}
+    peerDependencies:
+      vite: ^5.0.0 || ^6.0.0
+      vue: ^3.2.25
 
   '@vitejs/plugin-vue@6.0.3':
     resolution: {integrity: sha512-TlGPkLFLVOY3T7fZrwdvKpjprR3s4fxRln0ORDo1VQ7HHyxJwTlrjKU3kpVWTlaAjIEuCTokmjkZnr8Tpc925w==}
@@ -1667,13 +1698,11 @@ snapshots:
 
   '@csstools/css-tokenizer@3.0.4': {}
 
-  '@ctrl/tinycolor@3.6.1':
-    optional: true
+  '@ctrl/tinycolor@3.6.1': {}
 
   '@element-plus/icons-vue@2.3.2(vue@3.5.26(typescript@5.9.3))':
     dependencies:
       vue: 3.5.26(typescript@5.9.3)
-    optional: true
 
   '@esbuild/aix-ppc64@0.21.5':
     optional: true
@@ -1827,16 +1856,13 @@ snapshots:
   '@floating-ui/core@1.7.3':
     dependencies:
       '@floating-ui/utils': 0.2.10
-    optional: true
 
   '@floating-ui/dom@1.7.4':
     dependencies:
       '@floating-ui/core': 1.7.3
       '@floating-ui/utils': 0.2.10
-    optional: true
 
-  '@floating-ui/utils@0.2.10':
-    optional: true
+  '@floating-ui/utils@0.2.10': {}
 
   '@isaacs/cliui@8.0.2':
     dependencies:
@@ -1978,8 +2004,7 @@ snapshots:
 
   '@sinclair/typebox@0.34.47': {}
 
-  '@sxzz/popperjs-es@2.11.7':
-    optional: true
+  '@sxzz/popperjs-es@2.11.7': {}
 
   '@types/estree@1.0.8': {}
 
@@ -2001,7 +2026,6 @@ snapshots:
   '@types/lodash-es@4.17.12':
     dependencies:
       '@types/lodash': 4.17.23
-    optional: true
 
   '@types/lodash@4.17.23': {}
 
@@ -2011,14 +2035,18 @@ snapshots:
 
   '@types/stack-utils@2.0.3': {}
 
-  '@types/web-bluetooth@0.0.20':
-    optional: true
+  '@types/web-bluetooth@0.0.20': {}
 
   '@types/yargs-parser@21.0.3': {}
 
   '@types/yargs@17.0.35':
     dependencies:
       '@types/yargs-parser': 21.0.3
+
+  '@vitejs/plugin-vue@5.2.4(vite@5.4.21(@types/node@25.0.9))(vue@3.5.26(typescript@5.9.3))':
+    dependencies:
+      vite: 5.4.21(@types/node@25.0.9)
+      vue: 3.5.26(typescript@5.9.3)
 
   '@vitejs/plugin-vue@6.0.3(vite@5.4.21(@types/node@25.0.9))(vue@3.5.26(typescript@5.9.3))':
     dependencies:
@@ -2125,10 +2153,8 @@ snapshots:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
-    optional: true
 
-  '@vueuse/metadata@10.11.1':
-    optional: true
+  '@vueuse/metadata@10.11.1': {}
 
   '@vueuse/shared@10.11.1(vue@3.5.26(typescript@5.9.3))':
     dependencies:
@@ -2136,7 +2162,6 @@ snapshots:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
-    optional: true
 
   abbrev@2.0.0: {}
 
@@ -2164,8 +2189,7 @@ snapshots:
 
   assertion-error@1.1.0: {}
 
-  async-validator@4.2.5:
-    optional: true
+  async-validator@4.2.5: {}
 
   balanced-match@1.0.2: {}
 
@@ -2257,8 +2281,7 @@ snapshots:
       whatwg-mimetype: 4.0.0
       whatwg-url: 15.1.0
 
-  dayjs@1.11.19:
-    optional: true
+  dayjs@1.11.19: {}
 
   debug@4.4.3:
     dependencies:
@@ -2300,7 +2323,6 @@ snapshots:
       vue: 3.5.26(typescript@5.9.3)
     transitivePeerDependencies:
       - '@vue/composition-api'
-    optional: true
 
   emoji-regex@8.0.0: {}
 
@@ -2571,15 +2593,13 @@ snapshots:
       mlly: 1.8.0
       pkg-types: 1.3.1
 
-  lodash-es@4.17.22:
-    optional: true
+  lodash-es@4.17.22: {}
 
   lodash-unified@1.0.3(@types/lodash-es@4.17.12)(lodash-es@4.17.22)(lodash@4.17.21):
     dependencies:
       '@types/lodash-es': 4.17.12
       lodash: 4.17.21
       lodash-es: 4.17.22
-    optional: true
 
   lodash@4.17.21: {}
 
@@ -2597,8 +2617,7 @@ snapshots:
 
   mdn-data@2.12.2: {}
 
-  memoize-one@6.0.0:
-    optional: true
+  memoize-one@6.0.0: {}
 
   merge-stream@2.0.0: {}
 
@@ -2640,8 +2659,7 @@ snapshots:
     dependencies:
       abbrev: 2.0.0
 
-  normalize-wheel-es@1.2.0:
-    optional: true
+  normalize-wheel-es@1.2.0: {}
 
   npm-run-path@5.3.0:
     dependencies:
@@ -2977,7 +2995,6 @@ snapshots:
   vue-demi@0.14.10(vue@3.5.26(typescript@5.9.3)):
     dependencies:
       vue: 3.5.26(typescript@5.9.3)
-    optional: true
 
   vue-router@4.6.4(vue@3.5.26(typescript@5.9.3)):
     dependencies:
