@@ -1,0 +1,14 @@
+{
+  "name": "vue-dirty-guard-playground",
+  "private": true,
+  "dependencies": {
+    "vue": "^3.4.0",
+    "vue-router": "^4.2.5",
+    "element-plus": "^2.6.0",
+    "vue-dirty-guard": "workspace:*"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  }
+}

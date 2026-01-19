@@ -1,234 +1,37 @@
-# Vue Dirty Guard SDK（团队推广版）
+# vue-dirty-guard
 
-> **一句话定位**：
-> Vue Dirty Guard 是一个**应用层的“未提交变更保护机制”**，用于统一解决「表单 / 弹窗 / 路由 / 浏览器关闭」场景下的**未保存退出提示、自动保存、冲突处理**问题。
+## 测试使用指南
 
----
+在项目根目录执行以下命令：
 
-## 一、我们为什么要做这个 SDK？
-
-### 1️⃣ 真实痛点（你一定见过）
-
-* 表单写一半，点了返回，数据没了
-* 多 Tab / 多弹窗，谁该拦截？
-* 每个页面都自己写 `onBeforeRouteLeave`
-* 自动保存成功了，但 Guard 还在拦
-* 后端版本冲突，前端状态乱了
-
-👉 **本质问题：我们缺少一个“统一的变更提交保护机制”**。
-
----
-
-## 二、设计原则（非常重要）
-
-1. **这是应用层能力，不是 UI 能力**
-2. SDK 不关心你用什么表单库 / UI 库
-3. 只抽象“是否允许离开”
-4. 和 DDD / 乐观锁 / 自动保存天然兼容
-
----
-
-## 三、核心概念（统一团队语言）
-
-### Dirty Adapter（脏数据适配器）
-
-```ts
-interface DirtyAdapter {
-  id: string
-  isDirty(): boolean
-  reset(): void
-  description?: string
-}
+```bash
+pnpm -C packages/vue-dirty-guard test
 ```
 
-> **任何一个页面 / 表单 / 弹窗，只要实现这个接口，就能被统一管理。**
+运行特定测试文件
 
----
-
-### Dirty Guard（统一守卫）
-
-```ts
-dirtyGuard.hasDirty()      // 是否存在未提交变更
-dirtyGuard.resetAll()     // 提交 / 放弃后统一重置
-dirtyGuard.getDirtyAdapters()
+```bash
+pnpm -C packages/vue-dirty-guard test tests/unit/core/DirtyGuard.test.ts
 ```
 
----
+测试覆盖率
 
-## 四、最标准的使用方式（推荐）
-
-### 1️⃣ 页面中注册 Dirty Adapter
-
-```ts
-const adapter = {
-  id: 'customer-edit',
-  isDirty: () => !isEqual(form, snapshot.value),
-  reset: () => snapshot.value = cloneDeep(form),
-  description: '客户信息'
-}
-
-onMounted(() => dirtyGuard.register(adapter))
-onUnmounted(() => dirtyGuard.unregister(adapter.id))
+```bash
+pnpm -C packages/vue-dirty-guard test --coverage
 ```
 
----
+调试测试
 
-### 2️⃣ 路由统一拦截（只写一次）
-
-```ts
-router.beforeEach(() => {
-  if (!dirtyGuard.hasDirty()) return true
-  return confirm('内容未保存，是否离开？')
-})
+```bash
+pnpm -C packages/vue-dirty-guard test --inspect-brk
 ```
 
----
+## 关于 Monorepo
 
-### 3️⃣ 浏览器刷新 / 关闭保护
+在这个项目中，monorepo 允许：
 
-```ts
-window.addEventListener('beforeunload', e => {
-  if (!dirtyGuard.hasDirty()) return
-  e.preventDefault()
-  e.returnValue = ''
-})
-```
-
----
-
-## 五、Element Plus 集成规范（团队必读）
-
-### ElDialog 未保存关闭拦截
-
-```vue
-<el-dialog :before-close="handleBeforeClose" />
-```
-
-```ts
-const handleBeforeClose = useElDialogDirtyGuard(() => {
-  visible.value = false
-})
-```
-
-> **禁止在业务代码里直接写 confirm**，统一使用 Guard 提供的能力。
-
----
-
-## 六、自动保存（Auto Save）设计规范
-
-### 状态模型（统一）
-
-```text
-Pristine → Dirty → AutoSaving → Saved
-                     ↓
-                  Failed
-```
-
-### 推荐交互
-
-* 自动保存进行中：
-
-  * 页面右上角：`正在保存...`
-* 自动保存成功：
-
-  * 静默成功（不要 toast）
-* 自动保存失败：
-
-  * 明确提示 + 保持 Dirty
-
----
-
-## 七、版本冲突（乐观锁）UX 规范（非常重要）
-
-### 冲突发生时：
-
-```text
-你的修改基于旧版本
-服务器已有更新
-```
-
-### 标准处理弹窗
-
-**标题**：内容冲突提示
-
-**正文**：
-
-> 当前内容已被他人修改，你的修改尚未提交。
-
-**操作**：
-
-* 🔁 刷新数据（放弃本地修改）
-* 📝 手动合并（保留当前页面）
-
-> ❗ 冲突状态下 **Dirty Guard 必须继续拦截离开**
-
----
-
-## 八、Demo 项目说明（Vue3 + Element Plus）
-
-### Demo 目标
-
-* 展示 Dirty Guard 的**完整生命周期**
-* 让新人 10 分钟理解用法
-
----
-
-### Demo 页面结构
-
-```text
-/pages
- ├── CustomerEdit.vue      # 主表单（Dirty）
- ├── OrderDialog.vue       # 子弹窗（Dirty）
- └── AutoSaveBadge.vue     # 自动保存状态展示
-```
-
----
-
-### Demo 场景覆盖
-
-1. 修改表单 → 路由跳转拦截
-2. 修改表单 → 关闭 Dialog 拦截
-3. 自动保存成功 → 可直接离开
-4. 自动保存失败 → 继续拦截
-5. 模拟版本冲突 → 冲突弹窗
-
----
-
-## 九、团队协作约定（非常关键）
-
-### ✅ 推荐
-
-* 所有编辑型页面 **必须注册 Dirty Adapter**
-* 所有关闭行为 **必须走 Guard**
-* 自动保存成功 **必须 reset dirty**
-
-### ❌ 禁止
-
-* 页面私自写 `window.confirm`
-* 保存成功不 reset
-* 冲突状态放行路由
-
----
-
-## 十、一句话总结（对外统一口径）
-
-> **Dirty Guard 不是“表单技巧”，而是前端应用层的「变更提交保护机制」**
-
-它让：
-
-* 用户不丢数据
-* 代码不重复
-* 复杂页面可控
-
----
-
-## 十一、下一步（可选演进）
-
-* 字段级 Diff 展示
-* 自动保存频率策略
-* 与权限系统联动
-* 与后端审计日志对齐
-
----
-
-> **如果你在写一个会“修改数据”的页面，却没有用 Dirty Guard，那就是一个 Bug。**
+在一个仓库中管理多个相关的包
+共享依赖和配置
+使用 -C 参数指定在哪个子包中运行命令
+使用 pnpm -r 在所有子包中运行命令（如根目录的 pnpm -r test）
+希望这些信息能帮助你顺利运行项目的测试！如果你有任何其他问题，请随时提问。

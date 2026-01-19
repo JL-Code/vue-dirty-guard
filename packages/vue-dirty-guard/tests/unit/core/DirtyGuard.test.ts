@@ -1,4 +1,4 @@
-import { dirtyGuard } from '../../src/core/DirtyGuard'
+import { dirtyGuard } from '../../../src/core/DirtyGuard'
 
 
 describe('DirtyGuard', () => {
