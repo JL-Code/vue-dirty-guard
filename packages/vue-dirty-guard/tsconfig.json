@@ -1,12 +1,13 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "rootDir": "../..",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["../../playground/*"], // 告诉 TS @/ 指向 playground
+      "@/*": ["../../playground/*"] // 告诉 TS @/ 指向 playground
     },
-    "types": ["vitest/globals"], // 解决 describe / it / expect
+    "types": ["vitest/globals"] // 解决 describe / it / expect
   },
-  "include": ["src", "tests", "env.d.ts", "../../playground"], // 包含 src、tests、env.d.ts 和 playground 目录
+  "include": ["src", "tests", "env.d.ts", "../../playground"] // 包含 src、tests、env.d.ts 和 playground 目录
 }
