@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "rootDir": "../..",
     "baseUrl": ".",
     "paths": {
       "@/*": ["../../playground/*"], // 告诉 TS @/ 指向 playground

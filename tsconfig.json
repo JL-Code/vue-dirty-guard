@@ -5,6 +5,7 @@
     "module": "ESNext",
     "declaration": true,
     "outDir": "dist",
+    "rootDir": ".",
     "strict": true,
     "skipLibCheck": true,
     "moduleResolution": "Bundler",
