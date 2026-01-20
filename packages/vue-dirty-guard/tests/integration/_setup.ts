@@ -20,7 +20,15 @@ config.global.stubs = {
     template: `<input data-test="el-container" />`,
   },
   "el-input": {
-    template: `<input data-test="el-input" />`,
+    props: ["modelValue"],
+    emits: ["update:modelValue"],
+    template: `
+      <input
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
+        v-bind="$attrs"
+      />
+    `,
   },
   "el-input-number": {
     template: `<input data-test="el-input-number" />`,

@@ -1,23 +1,27 @@
 import { mount } from "@vue/test-utils";
-import { createRouter, createWebHistory } from "vue-router";
-import { describe, it, expect, vi } from "vitest";
-import App from "@/App.vue";
-import { routes } from "@/router";
-import { dirtyGuard } from "../../src/core/DirtyGuard";
+import { createRouter, createMemoryHistory } from "vue-router";
+import { describe, it, expect } from "vitest";
+import CustomerEdit from "@/pages/CustomerEdit.vue";
+import { dirtyGuard, setupDirtyRouterGuard } from "vue-dirty-guard";
 
 describe("router guard - dirty block", () => {
   it("blocks navigation when form is dirty", async () => {
-    vi.spyOn(window, "confirm").mockReturnValue(false);
-
     const router = createRouter({
-      history: createWebHistory(),
-      routes: routes,
+      history: createMemoryHistory(),
+      routes: [
+        { path: "/customer-edit", component: CustomerEdit },
+        { path: "/other", component: { template: "<div>Other Page</div>" } },
+      ],
     });
 
-    router.push("/customer-edit");
+    setupDirtyRouterGuard(router, {
+      confirm: () => false,
+    });
+
+    await router.push("/customer-edit");
     await router.isReady();
 
-    const wrapper = mount(App, {
+    const wrapper = mount(CustomerEdit, {
       global: {
         plugins: [router],
       },
