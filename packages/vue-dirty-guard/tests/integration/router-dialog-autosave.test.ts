@@ -15,18 +15,21 @@ describe("integration: router + dialog + autoSave", () => {
   beforeEach(() => {
     // 使用假计时器
     vi.useFakeTimers();
-    
+
     // 清理之前的适配器
     guard.clear();
-    
+
     // 模拟 window.confirm，让用户确认离开
-    vi.stubGlobal("confirm", vi.fn(() => true));
+    vi.stubGlobal(
+      "confirm",
+      vi.fn(() => true),
+    );
   });
 
   afterEach(() => {
     // 恢复真实计时器
     vi.useRealTimers();
-    
+
     // 恢复所有 mock
     vi.unstubAllGlobals();
   });

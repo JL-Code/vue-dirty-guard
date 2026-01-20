@@ -69,7 +69,7 @@ function simulateConflict() {
     <el-card header="客户编辑（CustomerEdit）">
         <el-form label-width="80">
             <el-form-item label="姓名">
-                <el-input v-model="form.name" />
+                <el-input v-model="form.name" data-test="name-input" />
             </el-form-item>
 
             <el-form-item label="手机号">

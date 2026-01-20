@@ -47,3 +47,5 @@ setupDirtyRouterGuard(router, {
 });
 
 export default router;
+
+export const routes = router.getRoutes();

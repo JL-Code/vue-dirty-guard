@@ -1,14 +1,11 @@
 {
-    "compilerOptions": {
-        "target": "ES2020",
-        "module": "ESNext",
-        "declaration": true,
-        "outDir": "dist",
-        "strict": true,
-        "skipLibCheck": true,
-        "moduleResolution": "Bundler",
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["../../playground/*"], // 告诉 TS @/ 指向 playground
     },
-    "include": [
-        "src"
-    ]
+    "types": ["vitest/globals"], // 解决 describe / it / expect
+  },
+  "include": ["src", "tests", "env.d.ts", "../../playground"], // 包含 src、tests、env.d.ts 和 playground 目录
 }

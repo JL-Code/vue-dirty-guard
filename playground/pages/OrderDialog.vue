@@ -60,7 +60,10 @@ async function beforeClose(done: () => void) {
     >
         <el-form label-width="80">
             <el-form-item label="商品">
-                <el-input v-model="order.product" />
+                <el-input
+                    v-model="order.product"
+                    data-test="order-title-input"
+                />
             </el-form-item>
 
             <el-form-item label="数量">
