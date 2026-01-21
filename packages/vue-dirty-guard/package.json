@@ -1,7 +1,7 @@
 {
   "name": "vue-dirty-guard",
   "version": "0.1.0",
-  "description": "Enterprise-level Dirty Guard SDK for Vue 3",
+  "description": "Enterprise-level dirty state guard & autosave SDK for Vue 3",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
@@ -9,7 +9,7 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     }
   },
@@ -23,14 +23,16 @@
     "lint": "eslint ."
   },
   "peerDependencies": {
+    "element-plus": ">=2.7",
     "vue": ">=3.3",
     "vue-router": ">=4.2"
   },
-  "optionalDependencies": {
-    "element-plus": ">=2.7"
+  "peerDependenciesMeta": {
+    "element-plus": {
+      "optional": true
+    }
   },
   "devDependencies": {
-    "@types/jest": "^30.0.0",
     "@types/lodash": "^4.17.23",
     "@vitejs/plugin-vue": "^6.0.3",
     "@vitest/coverage-v8": "^4.0.17",
