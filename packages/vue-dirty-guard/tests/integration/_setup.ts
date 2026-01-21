@@ -75,3 +75,9 @@ beforeEach(() => {
   // 默认：用户允许离开
   vi.spyOn(window, "confirm").mockReturnValue(true);
 });
+
+vi.mock("@exodus/bytes", () => {
+  const TextDecoder =
+    (globalThis as any).TextDecoder || require("util").TextDecoder;
+  return { TextDecoder };
+});
