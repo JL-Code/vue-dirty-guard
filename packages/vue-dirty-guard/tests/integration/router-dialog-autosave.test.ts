@@ -72,7 +72,12 @@ describe("integration: router + dialog + autoSave", () => {
       ],
     });
 
-    setupDirtyRouterGuard(router);
+    setupDirtyRouterGuard(router, {
+      confirm: async () => {
+        await vi.runAllTimersAsync();
+        return true;
+      },
+    });
 
     /**
      * 4️⃣ 初始进入首页
@@ -92,9 +97,6 @@ describe("integration: router + dialog + autoSave", () => {
      * 6️⃣ 触发路由跳转（应被 guard 拦截）
      */
     const navigation = router.push("/next");
-
-    // 等待防抖延迟
-    await vi.runAllTimersAsync();
 
     await navigation;
 
