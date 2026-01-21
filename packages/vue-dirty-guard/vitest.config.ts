@@ -16,6 +16,7 @@ export default defineConfig({
     alias: {
       // 让测试能 import playground
       "@": path.resolve(__dirname, "../../playground"),
+      "vue-dirty-guard": path.resolve(__dirname, "./src"),
     },
   },
 });
