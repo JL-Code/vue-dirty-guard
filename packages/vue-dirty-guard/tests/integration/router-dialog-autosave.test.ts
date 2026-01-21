@@ -74,6 +74,7 @@ describe("integration: router + dialog + autoSave", () => {
 
     setupDirtyRouterGuard(router, {
       confirm: async () => {
+        // 把当前所有挂起的定时器（包括 useAutoSave 的 debounce 定时器）全部跑完；
         await vi.runAllTimersAsync();
         return true;
       },

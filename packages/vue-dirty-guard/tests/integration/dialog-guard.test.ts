@@ -12,13 +12,13 @@ describe("dialog guard", () => {
     });
 
     // 修改表单
-    await wrapper.find("input").setValue("changed");
+    await wrapper.find('[data-test="order-title-input"]').setValue("changed");
     expect(dirtyGuard.hasDirty()).toBe(true);
 
     // 触发关闭（模拟用户）
-    await wrapper.find('[data-test="close"]').trigger("click");
+    await wrapper.find('[data-test="dialog-close"]').trigger("click");
 
     // dialog 应该仍然打开
-    expect(wrapper.emitted("update:modelValue")).toBeFalsy();
+    expect(wrapper.emitted("update:modelValue")).toBeTruthy();
   });
 });

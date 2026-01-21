@@ -5,6 +5,8 @@ import { dirtyGuard } from "vue-dirty-guard";
 
 describe("autosave success", () => {
   it("clears dirty after autosave success", async () => {
+    vi.useFakeTimers();
+
     const wrapper = mount(CustomerEdit);
 
     // mock 成功的 API（而不是组件方法）
@@ -13,11 +15,12 @@ describe("autosave success", () => {
       json: async () => ({}),
     } as any);
 
-    await wrapper.find("input").setValue("changed");
+    
+    await wrapper.find('[data-test="name-input"]').setValue("changed");
     expect(dirtyGuard.hasDirty()).toBe(true);
 
-    // 等 autosave debounce
-    await new Promise((r) => setTimeout(r, 600));
+    // 跑完所有与 autosave 相关的定时器（debounce + 模拟保存耗时）
+    await vi.runAllTimersAsync();
 
     expect(dirtyGuard.hasDirty()).toBe(false);
   });

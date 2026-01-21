@@ -26,7 +26,7 @@ watch(visible, (v) => {
     } else {
         dirtyGuard.unregister(adapterId);
     }
-});
+}, { immediate: true });
 
 async function beforeClose(done: () => void) {
     if (!dirty.isDirty.value) {
