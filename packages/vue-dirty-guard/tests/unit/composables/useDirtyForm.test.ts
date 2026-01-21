@@ -1,5 +1,5 @@
 import { reactive } from 'vue'
-import { useDirtyForm } from '../../../src/composables/useDirtyForm'
+import { useDirtyForm } from 'vue-dirty-guard'
 
 
 describe('useDirtyForm', () => {

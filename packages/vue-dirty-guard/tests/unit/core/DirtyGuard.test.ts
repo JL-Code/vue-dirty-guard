@@ -1,4 +1,4 @@
-import { dirtyGuard } from '../../../src/core/DirtyGuard'
+import { dirtyGuard } from 'vue-dirty-guard'
 
 
 describe('DirtyGuard', () => {
