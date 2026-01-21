@@ -4,8 +4,7 @@
   "scripts": {
     "dev": "pnpm -C playground dev",
     "build": "pnpm -r build",
-    "test": "pnpm -r test",
-    "publish": "pnpm -r publish"
+    "test": "pnpm -r test"
   },
   "devDependencies": {
     "@types/node": "^25.0.9",
