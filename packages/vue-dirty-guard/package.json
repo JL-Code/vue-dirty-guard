@@ -35,10 +35,9 @@
   "devDependencies": {
     "@types/lodash": "^4.17.23",
     "@vitejs/plugin-vue": "^6.0.3",
-    "@vitest/coverage-v8": "^4.0.17",
     "@vue/test-utils": "^2.4.0",
     "element-plus": "^2.7.0",
-    "jsdom": "^27.4.0",
+    "jsdom": "22.1.0",
     "lodash": "^4.17.21",
     "tsup": "^8.0.0",
     "typescript": "^5.3.0",
