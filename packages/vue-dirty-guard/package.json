@@ -1,6 +1,6 @@
 {
   "name": "vue-dirty-guard",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Enterprise-level dirty state guard & autosave SDK for Vue 3",
   "type": "module",
   "main": "dist/index.cjs",
