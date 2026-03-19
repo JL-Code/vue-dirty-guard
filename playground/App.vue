@@ -6,6 +6,7 @@
                     vue-dirty-guard Playground
                 </el-text>
                 <el-button @click="$router.push('/')">表单页</el-button>
+                <el-button @click="$router.push('/element-plus-dialog')">element-plus-dialog</el-button>
                 <el-button @click="$router.push('/customer-edit')">
                     客户信息编辑
                 </el-button>

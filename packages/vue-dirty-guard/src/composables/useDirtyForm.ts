@@ -1,23 +1,19 @@
-import { ref, computed, watch, type Ref } from 'vue'
-import cloneDeep from 'lodash/cloneDeep'
-import isEqual from 'lodash/isEqual'
-
+import { ref, computed, Ref } from "vue";
+import cloneDeep from "lodash/cloneDeep";
+import isEqual from "lodash/isEqual";
 
 export function useDirtyForm<T extends object>(form: T) {
-    const snapshot: Ref<T> = ref(cloneDeep(form)) as Ref<T>
+  const snapshot: Ref<T> = ref(cloneDeep(form)) as Ref<T>;
 
+  const isDirty = computed(() => !isEqual(form, snapshot.value));
 
-    const isDirty = computed(() => !isEqual(form, snapshot.value))
+  function reset() {
+    snapshot.value = cloneDeep(form);
+  }
 
-
-    function reset() {
-        snapshot.value = cloneDeep(form)
-    }
-
-
-    return {
-        isDirty,
-        reset,
-        snapshot
-    }
+  return {
+    isDirty,
+    reset,
+    snapshot,
+  };
 }
